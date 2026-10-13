@@ -1,26 +1,109 @@
 @import "tailwindcss";
 
+@theme {
+  --color-navy: #0B1121;
+  --color-navy-light: #161E2F;
+  --color-navy-card: #1E293B;
+  --color-navy-dark: #070B16;
+  --color-amber: #F5A623;
+  --color-amber-hover: #D98C1E;
+  
+  --font-sans: var(--font-inter), sans-serif;
+  --font-display: var(--font-plus-jakarta), sans-serif;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #FFFFFF;
+  --foreground: #0B1121;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+/* Custom premium transitions and lifters */
+.hover-lift {
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.hover-lift:hover {
+  transform: translateY(-4px);
+}
+
+.transition-premium {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Custom Low-Opacity Navy Shadow */
+.shadow-navy-tint {
+  box-shadow: 0 10px 30px -10px rgba(11, 17, 33, 0.08), 0 1px 3px rgba(11, 17, 33, 0.02);
+}
+
+.shadow-navy-tint-hover:hover {
+  box-shadow: 0 20px 40px -15px rgba(11, 17, 33, 0.12), 0 1px 3px rgba(11, 17, 33, 0.02);
+}
+
+/* Scroll reveals keyframes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal-fade-up {
+  animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Radar/Truck tracking pulse & route move keyframes */
+@keyframes truckTransit {
+  0% {
+    left: 0%;
+    transform: translateX(0) scaleX(1);
+  }
+  48% {
+    left: 100%;
+    transform: translateX(-100%) scaleX(1);
+  }
+  50% {
+    left: 100%;
+    transform: translateX(-100%) scaleX(-1);
+  }
+  98% {
+    left: 0%;
+    transform: translateX(0) scaleX(-1);
+  }
+  100% {
+    left: 0%;
+    transform: translateX(0) scaleX(1);
+  }
+}
+
+.animate-truck-transit {
+  animation: truckTransit 12s linear infinite;
+}
+
+@keyframes radarPulse {
+  0% {
+    transform: scale(0.95);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(0.95);
+    opacity: 0;
+  }
+}
+
+.animate-radar-pulse {
+  animation: radarPulse 3s cubic-bezier(0.16, 1, 0.3, 1) infinite;
 }
